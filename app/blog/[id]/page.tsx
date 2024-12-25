@@ -3,11 +3,12 @@ import Navbar from "@/components/Navbar"
 
 export interface BlogProps {
     id: number,
-    title: string
-    content: string
-    writer: string
+    title: string,
+    content: string,
+    writer: string,
     createdAt: string
 }
+
 async function fetchBlog(id: string): Promise<BlogProps | null> {
     const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
         cache: 'no-store',
@@ -27,14 +28,13 @@ async function fetchBlog(id: string): Promise<BlogProps | null> {
     }
 }
 
+// Remove the explicit typing of params as it can be inferred from Next.js's dynamic route
 const Page = async ({ params }: { params: { id: string } }) => {
-
     const { id } = params
-
     const blog = await fetchBlog(id)
 
     if (!blog) {
-        return <div> Blog not found</div>
+        return <div>Blog not found</div>
     }
 
     return (
