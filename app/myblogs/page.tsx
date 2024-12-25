@@ -1,14 +1,11 @@
-import Blogs from '@/components/Blogs'
-import Herosection from '@/components/Herosection'
 import Navbar from '@/components/Navbar'
-import React from 'react'
+import UsersBlog from '@/components/UsersBlog'
 
 const page = () => {
   return (
     <div className='bg-gradient-to-bl from-slate-800 to-slate-950 min-h-screen h-full'>
       <Navbar />
-      <Herosection />
-      <Blogs />
+      <UsersBlog />
     </div>
   )
 }

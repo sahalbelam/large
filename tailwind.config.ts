@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        press: ['var(--font-press)']
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

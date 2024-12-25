@@ -2,20 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.menu-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #f9f9f9;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.editor {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+  min-height: 200px;
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.is-active {
+  font-weight: bold;
+  color: blue;
 }
