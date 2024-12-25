@@ -1,6 +1,7 @@
 'use client';
 
 import { useUser } from '@clerk/nextjs';
+import Image from 'next/image';
 import React from 'react';
 
 interface AvatarProps {
@@ -14,7 +15,7 @@ const Avatar = ({ writer, createdAt }: AvatarProps) => {
 
     return (
         <div className="flex items-center space-x-3 rounded-lg">
-            <img
+            <Image
                 className="rounded-full border-2 border-slate-600 hover:scale-105 transition-transform duration-100"
                 src={user.imageUrl}
                 alt="User Avatar"

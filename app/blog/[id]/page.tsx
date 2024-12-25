@@ -1,6 +1,5 @@
 import Avatar from "@/components/Avatar"
 import Navbar from "@/components/Navbar"
-import { Trash2 } from "lucide-react"
 
 export interface BlogProps {
     id: number,
