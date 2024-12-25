@@ -10,7 +10,7 @@ interface Blog {
 }
 
 async function fetchBlog(): Promise<Blog[] | null> {
-  const response = await fetch('http://localhost:3000/api/blog')
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog`)
   if (!response.ok) {
     return null
   }

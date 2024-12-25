@@ -29,7 +29,7 @@ const UsersBlog = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:3000/api/user", {
+        const response = await fetch(`/api/user`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const UsersBlog = () => {
   const handleDelete = async (id: number) => {
     try {
       setDeletingId(id);
-      const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
+      const response = await fetch(`/api/blog/${id}`, {
         method: 'DELETE',
       });
 

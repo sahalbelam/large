@@ -19,7 +19,7 @@ export interface BlogProps {
 // Function to fetch the blog using the given id
 async function fetchBlog(id: string): Promise<BlogProps | null> {
   try {
-    const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/${id}`, {
       cache: "no-store", // Ensure fresh data
     });
 
