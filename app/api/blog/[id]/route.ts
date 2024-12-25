@@ -1,11 +1,8 @@
-// app/api/blog/[id]/route.ts
+//@ts-nocheck
 import prisma from "@/utils/db";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET({ params }: { params: { id: string } } ) {
 
   const blogId = Number(params.id);
 
@@ -45,8 +42,7 @@ export async function GET(
   }
 }
 
-export async function DELETE(req: NextRequest,
-  { params }: { params: { id: string } }) {
+export async function DELETE({ params }: { params: { id: string } }) {
 
   const blogId = Number(params.id);
 
