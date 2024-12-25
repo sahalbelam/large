@@ -1,8 +1,11 @@
-//@ts-nocheck
+// app/api/blog/[id]/route.ts
 import prisma from "@/utils/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({ params }: { params: { id: string } } ) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
 
   const blogId = Number(params.id);
 
@@ -21,11 +24,11 @@ export async function GET({ params }: { params: { id: string } } ) {
         content: true,
         createdAt: true,
         writer: {
-          select:{
-            username:true
-          }
-        }
-      }
+          select: {
+            username: true,
+          },
+        },
+      },
     });
 
     if (!oneBlog) {
@@ -42,9 +45,10 @@ export async function GET({ params }: { params: { id: string } } ) {
   }
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest,
+  { params }: { params: { id: string } }) {
 
-  const blogId = Number(params.id);
+  const blogId = Number(context.params.id);
 
   try {
     const blogCheck = await prisma.blog.findFirst({
@@ -52,7 +56,7 @@ export async function DELETE({ params }: { params: { id: string } }) {
         id: blogId
       }
     })
-    if(!blogCheck){
+    if (!blogCheck) {
       return new NextResponse('blog not found', { status: 404 })
     }
     await prisma.blog.delete({
