@@ -1,9 +1,10 @@
 import prisma from "@/utils/db";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(req: NextRequest) {
+  const  id  = req.nextUrl.pathname.split('/').pop() || '';
 
-  const blogId = Number(params.id);
+  const blogId = Number(id);
 
   if (isNaN(blogId)) {
     return new NextResponse("Invalid blog ID", { status: 400 });
@@ -41,9 +42,10 @@ export async function GET({ params }: { params: { id: string } }) {
   }
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest) {
+  const  id  = req.nextUrl.pathname.split('/').pop() || '';
 
-  const blogId = Number(params.id);
+  const blogId = Number(id);
 
   try {
     const blogCheck = await prisma.blog.findFirst({
@@ -52,14 +54,14 @@ export async function DELETE({ params }: { params: { id: string } }) {
       }
     })
     if (!blogCheck) {
-      return new NextResponse('blog not found', { status: 404 })
+      return new NextResponse('Blog not found', { status: 404 })
     }
     await prisma.blog.delete({
       where: {
         id: blogId
       },
     })
-    return new NextResponse("blog deleted", { status: 201 })
+    return new NextResponse("Blog deleted", { status: 201 })
 
   } catch (error) {
     return new NextResponse(JSON.stringify(error), { status: 500 })
