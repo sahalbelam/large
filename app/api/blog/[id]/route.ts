@@ -1,4 +1,3 @@
-//@ts-nocheck
 import prisma from "@/utils/db";
 import { NextResponse } from "next/server";
 
@@ -44,7 +43,7 @@ export async function GET({ params }: { params: { id: string } }) {
 
 export async function DELETE({ params }: { params: { id: string } }) {
 
-  const blogId = Number(context.params.id);
+  const blogId = Number(params.id);
 
   try {
     const blogCheck = await prisma.blog.findFirst({
