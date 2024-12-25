@@ -8,6 +8,7 @@ async function fetchBlog(): Promise<BlogProps[] | null> {
   }
 
   const data = await response.json()
+  // @ts-ignore
   return data.map((blog: any) => ({
     id:blog.id,
     title: blog.title,

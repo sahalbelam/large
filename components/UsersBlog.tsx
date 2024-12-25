@@ -37,6 +37,7 @@ const UsersBlog = () => {
 
         const data = await response.json();
         setBlogs(
+          // @ts-ignore
           data.map((blog: any) => ({
             id: blog.id,
             title: blog.title,
