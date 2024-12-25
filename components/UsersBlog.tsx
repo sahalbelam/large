@@ -2,12 +2,20 @@
 import { useAuth } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { BlogProps } from "@/app/blog/[id]/page";
 import { Trash2 } from "lucide-react";
+
+interface Blog {
+  id: number;
+  title: string;
+  content: string;
+  writer: {
+    username: string;
+  };
+}
 
 const UsersBlog = () => {
   const { getToken } = useAuth();
-  const [blogs, setBlogs] = useState<BlogProps[] | null>(null);
+  const [blogs, setBlogs] = useState<Blog[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
@@ -37,12 +45,11 @@ const UsersBlog = () => {
 
         const data = await response.json();
         setBlogs(
-          // @ts-ignore
-          data.map((blog: any) => ({
+          data.map((blog: Blog) => ({
             id: blog.id,
             title: blog.title,
             content: blog.content,
-            writer: blog.writer.username,
+            writer: blog.writer,
           }))
         );
       } catch (error) {
@@ -97,7 +104,7 @@ const UsersBlog = () => {
                       dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 100) + "....." }}
                       className="text-slate-400 flex h-auto items-center"
                     />
-                    <h4 className="text-slate-400 italic text-sm mt-4">✍️ {blog.writer}</h4>
+                    <h4 className="text-slate-400 italic text-sm mt-4">✍️ {blog.writer.username}</h4>
                   </div>
 
                 </Link>

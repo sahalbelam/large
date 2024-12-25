@@ -1,19 +1,26 @@
-import { BlogProps } from "@/app/blog/[id]/page"
 import Link from "next/link"
 
-async function fetchBlog(): Promise<BlogProps[] | null> {
+interface Blog {
+  id: number;
+  title: string;
+  content: string;
+  writer: {
+    username: string;
+  };
+}
+
+async function fetchBlog(): Promise<Blog[] | null> {
   const response = await fetch('http://localhost:3000/api/blog')
   if (!response.ok) {
     return null
   }
 
   const data = await response.json()
-  // @ts-ignore
-  return data.map((blog: any) => ({
+  return data.map((blog: Blog) => ({
     id:blog.id,
     title: blog.title,
     content: blog.content,
-    writer:blog.writer.username
+    writer:blog.writer
   }))
 }
 
@@ -41,7 +48,7 @@ const Blogs = async () => {
                 <div>
                     <h2 className="text-slate-200 font-bold text-2xl mb-2"> {blog.title}</h2>
                     <div dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 100)+"....." }}  className="text-slate-400 flex h-auto items-center" />
-                    <h4 className="text-slate-400 italic text-sm mt-4">✍️ {blog.writer}</h4>
+                    <h4 className="text-slate-400 italic text-sm mt-4">✍️ {blog.writer.username}</h4>
                 </div>
                   </Link>
               </div>
