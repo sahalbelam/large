@@ -66,7 +66,7 @@ export default function Home() {
       setLoading(true);
       const token = await getToken();
 
-      const response = await fetch('http://localhost:3000/api/blog', {
+      const response = await fetch('/api/blog', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
